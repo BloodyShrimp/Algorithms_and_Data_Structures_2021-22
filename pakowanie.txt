@@ -1,0 +1,1 @@
+tar zcvf Szymon_Werk_Zestaw01.tar.gz Zestaw01
