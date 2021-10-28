@@ -1,9 +1,9 @@
-#include "ArrayStack.hpp"
+#include "LinkedQueue.hpp"
 #include <iostream>
 
 int main(int argc, const char *argv[])
 {
-    Stack stos(1000000);
+    Queue kolejka;
     int operations_amount;
     char operation;
     int element;
@@ -15,20 +15,20 @@ int main(int argc, const char *argv[])
         {
         case 'A':
             std::cin >> element;
-            stos.push(element);
+            kolejka.push(element);
             break;
         case 'D':
-            if (stos.empty())
+            if (kolejka.empty())
             {
                 std::cout << "EMPTY" << std::endl;
             }
             else
             {
-                std::cout << stos.pop() << std::endl;
+                std::cout << kolejka.pop() << std::endl;
             }
             break;
         case 'S':
-            std::cout << stos.size() << std::endl;
+            std::cout << kolejka.size() << std::endl;
             break;
         }
     }
