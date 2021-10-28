@@ -8,7 +8,7 @@ DYNLIB	:= -Wl,-rpath ./
 
 .PHONY: all clean cleano cleantxt
 
-all: Queue.x Generator.x Radix.x
+all: Queue.x Radix.x
 
 %.x: %.o
 	$(CC) $(LDFLAGS) $@ $^
@@ -29,5 +29,3 @@ Queue.o: Queue.cpp ArrayQueue.hpp LinkedQueue.hpp
 Queue.x: Queue.o ArrayQueue.hpp LinkedQueue.hpp
 Radix.o: Radix.cpp ArrayQueue.hpp LinkedQueue.hpp
 Radix.x: Radix.o ArrayQueue.hpp LinkedQueue.hpp
-Generator.o: Generator.cpp
-Generator.x: Generator.o
