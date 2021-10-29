@@ -5,7 +5,8 @@
 class Queue
 {
 public:
-    Queue(int max_size); // Konstruktor domyślny
+    Queue();    // Konstruktor domyślny z romiarem 10^6
+    Queue(int max_size); // Konstruktor z rozmiarem tablicy
     ~Queue();
     void push(int x); // Wstawia element x do kolejki (także enqueue)
     int pop();        // Usuwa element z kolejki i zwraca jego wartość (dequeue)
@@ -18,6 +19,12 @@ private:
     int *mdata;
     int mcapacity = 0;
 };
+
+Queue::Queue()
+{
+    mcapacity = 1000000;
+    mdata = new int[mcapacity];
+}
 
 Queue::Queue(int max_size)
 {

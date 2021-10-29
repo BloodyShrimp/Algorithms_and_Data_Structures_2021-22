@@ -1,17 +1,15 @@
-#include "LinkedQueue.hpp"
+#include "ArrayQueue.hpp"
 #include <vector>
 #include <iostream>
 #include <iterator>
-#include <cmath>
 
 void radix(std::vector<int> &v)
 {
     Queue index[10];
     int number;
-    int dividor;
+    int dividor = 1;
     for (int i = 0; i < 9; i++)
     {
-        dividor = std::pow(10, i);
         for (const auto &n : v)
         {
             number = n / dividor;
@@ -26,6 +24,7 @@ void radix(std::vector<int> &v)
                 v.push_back(index[j].pop());
             }
         }
+        dividor *= 10;
     }
 }
 
