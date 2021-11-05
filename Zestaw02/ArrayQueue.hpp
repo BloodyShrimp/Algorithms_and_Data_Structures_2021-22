@@ -5,7 +5,7 @@
 class Queue
 {
 public:
-    Queue();    // Konstruktor domyślny z romiarem 10^6
+    Queue();             // Konstruktor domyślny z romiarem 10^6
     Queue(int max_size); // Konstruktor z rozmiarem tablicy
     ~Queue();
     void push(int x); // Wstawia element x do kolejki (także enqueue)

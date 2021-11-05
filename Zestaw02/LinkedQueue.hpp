@@ -43,6 +43,7 @@ void Queue::push(int x)
 {
     Node *temp = new Node();
     temp->value = x;
+    temp->next = NULL;
     if (tail == NULL)
     {
         head = temp;
@@ -50,7 +51,6 @@ void Queue::push(int x)
         msize++;
         return;
     }
-
     tail->next = temp;
     tail = temp;
     msize++;
@@ -82,7 +82,7 @@ int Queue::size()
 
 bool Queue::empty()
 {
-    if(head == NULL)
+    if (head == NULL)
     {
         return true;
     }
