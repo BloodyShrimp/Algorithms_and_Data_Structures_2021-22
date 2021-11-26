@@ -1,4 +1,4 @@
-#include "LinkedList.hpp"
+#include "CursorList.hpp"
 #include <iostream>
 
 int main()
