@@ -3,40 +3,47 @@
 #include <iostream>
 #include <stdexcept>
 
+template <class T>
 class List
 {
 public:
     List();
-    void push_front(int x);    // Dołącza element na początek listy
-    int pop_front();           // Usuwa i zwraca element z początku listy
-    void push_back(int x);     // Dołącza element na koniec listy
-    int pop_back();            // Usuwa i zwraca element z końca listy
-    int size();                // Zwraca liczbę elementów w liście
-    bool empty();              // Zwraca true gdy lista jest pusta
-    void clear();              // Czyści listę
-    int find(int x);           // Zwraca pozycję pierwszego elementu o wartości x
-    int erase(int i);          // Usuwa i zwraca element na pozycji i
-    void insert(int i, int x); // Wstawia element x przed pozycję i
-    int remove(int x);         // Usuwa wystąpienia x i zwraca ich liczbę
+    void push_front(T x);        // Dołącza element na początek listy
+    T pop_front();               // Usuwa i zwraca element z początku listy
+    void push_back(T x);         // Dołącza element na koniec listy
+    T pop_back();                // Usuwa i zwraca element z końca listy
+    int size();                  // Zwraca liczbę elementów w liście
+    bool empty();                // Zwraca true gdy lista jest pusta
+    void clear();                // Czyści listę
+    int find(T x);               // Zwraca pozycję pierwszego elementu o wartości x
+    T erase(int i);              // Usuwa i zwraca element na pozycji i
+    void insert(int i, T x);     // Wstawia element x przed pozycję i
+    int remove(T x);             // Usuwa wystąpienia x i zwraca ich liczbę
+    T &operator[](const int &i); // operator [] zwraca referencję do wartości na pozycji i
+    bool is_present(T x);
+
 private:
     struct Node
-    {                      // Zagnieżdżona klasa węzła
-        int x;             // Element przechowywany przez węzeł listy, guard = size
+    {                         // Zagnieżdżona klasa węzła
+        T x;                  // Element przechowywany przez węzeł listy, guard = size
         Node *prev = nullptr; // Wskaźnik do poprzedniego węzła, guard = tail
         Node *next = nullptr; // Wskaźnik do kolejnego węzła, guard = head
     };
 
+    int Lsize = 0;
     Node guard; // x = size, prev = tail, next = head
 };
 
-List::List()
+template <class T>
+List<T>::List()
 {
     guard.next = &guard;
     guard.prev = &guard;
-    guard.x = 0;
+    Lsize = 0;
 }
 
-void List::push_front(int x)
+template <class T>
+void List<T>::push_front(T x)
 {
     Node *temp = new Node();
     Node *before_this = guard.next;
@@ -45,25 +52,27 @@ void List::push_front(int x)
     temp->prev = before_this->prev;
     temp->next->prev = temp;
     temp->prev->next = temp;
-    guard.x++;
+    Lsize++;
 }
 
-int List::pop_front()
+template <class T>
+T List<T>::pop_front()
 {
     Node *popped = guard.next;
     if (popped == &guard)
     {
         throw std::out_of_range("Popping an empty list.\n");
     }
-    int temp_int = popped->x;
+    T temp_T = popped->x;
     popped->prev->next = popped->next;
     popped->next->prev = popped->prev;
     delete popped;
-    guard.x--;
-    return temp_int;
+    Lsize--;
+    return temp_T;
 }
 
-void List::push_back(int x)
+template <class T>
+void List<T>::push_back(T x)
 {
     Node *temp = new Node();
     Node *before_this = &guard;
@@ -72,38 +81,43 @@ void List::push_back(int x)
     temp->prev = before_this->prev;
     temp->next->prev = temp;
     temp->prev->next = temp;
-    guard.x++;
+    Lsize++;
 }
 
-int List::pop_back()
+template <class T>
+T List<T>::pop_back()
 {
     Node *popped = guard.prev;
     if (popped == &guard)
     {
         throw std::out_of_range("Popping an empty list.\n");
     }
-    int temp_int = popped->x;
+    T temp_T = popped->x;
     popped->prev->next = popped->next;
     popped->next->prev = popped->prev;
     delete popped;
-    guard.x--;
-    return temp_int;
+    Lsize--;
+    return temp_T;
 }
 
-int List::size()
+template <class T>
+int List<T>::size()
 {
-    return guard.x;
+    return Lsize;
 }
 
-bool List::empty()
+template <class T>
+bool List<T>::empty()
 {
-    return guard.x == 0;
+    return Lsize == 0;
 }
 
-void List::clear()
+template <class T>
+void List<T>::clear()
 {
     Node *ptr = guard.next;
     Node *temp_ptr;
+
     while (ptr != &guard)
     {
         temp_ptr = ptr->next;
@@ -112,10 +126,11 @@ void List::clear()
     }
     guard.next = &guard;
     guard.prev = &guard;
-    guard.x = 0;
+    Lsize = 0;
 }
 
-int List::find(int x)
+template <class T>
+int List<T>::find(T x)
 {
     Node *temp = guard.next;
     int index = 0;
@@ -131,9 +146,10 @@ int List::find(int x)
     return -1;
 }
 
-int List::erase(int i)
+template <class T>
+T List<T>::erase(int i)
 {
-    if (i > guard.x - 1 || i < 0)
+    if (i > Lsize - 1 || i < 0)
     {
         throw std::out_of_range("There is no such index.\n");
     }
@@ -146,17 +162,18 @@ int List::erase(int i)
     {
         popped = popped->next;
     }
-    int temp_int = popped->x;
+    T temp_T = popped->x;
     popped->prev->next = popped->next;
     popped->next->prev = popped->prev;
     delete popped;
-    guard.x--;
-    return temp_int;
+    Lsize--;
+    return temp_T;
 }
 
-void List::insert(int i, int x)
+template <class T>
+void List<T>::insert(int i, T x)
 {
-    if (i > guard.x - 1 || i < 0)
+    if (i > Lsize - 1 || i < 0)
     {
         throw std::out_of_range("There is no such index.\n");
     }
@@ -171,10 +188,11 @@ void List::insert(int i, int x)
     temp->prev = before_this->prev;
     temp->next->prev = temp;
     temp->prev->next = temp;
-    guard.x++;
+    Lsize++;
 }
 
-int List::remove(int x)
+template <class T>
+int List<T>::remove(T x)
 {
     int index;
     int counter = 0;
@@ -182,10 +200,38 @@ int List::remove(int x)
     {
         erase(index);
         counter++;
-        guard.x--;
+        Lsize--;
     }
 
     return counter;
+}
+
+template <class T>
+T &List<T>::operator[](const int &i)
+{
+    if (i > Lsize - 1 || i < 0)
+    {
+        throw std::out_of_range("There is no such index.\n");
+    }
+    Node *ref = guard.next;
+    for (int j = 0; j < i; j++)
+    {
+        ref = ref->next;
+    }
+    return ref->x;
+}
+
+template <class T>
+bool List<T>::is_present(T x)
+{
+    if (find(x) == -1)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
 
 #endif // LINKEDLIST

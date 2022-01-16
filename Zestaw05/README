@@ -1,0 +1,18 @@
+n elementów przestawiamy średnio (n-1)/2 razy ponieważ średnio połowa elementów jest posortowana
+i średnio element musi być przestawiony do środka posortowanych elementów
+
+n*(n-1)*1/2*1/2
+1/4 * n^2 - 1/4 * n
+
+dla n = 10000
+shifts = 24997500
+wynik programu dla n = 10000:
+25245299
+
+w najgoroszym przypadku n elementów przestawimy (n-1) razy średnio do środka posortowanych elementów
+n*(n-1)*1/2
+1/2 * n^2 - 1/2 * n
+
+w najlepszym przypadku nie przestawiamy żadnych elementów tylko porównujemy n-1 elementów
+wynik programy dla n = 10000 posortowanych elementów:
+9999
