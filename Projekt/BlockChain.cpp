@@ -1,6 +1,6 @@
+#include "LinkedList.hpp"
 #include "Block.hpp"
 #include "BlockChain.hpp"
-#include "LinkedList.hpp"
 
 BlockChain::BlockChain(int _complexity)
 {
@@ -20,6 +20,7 @@ void BlockChain::addBlock(std::string data)
     std::string prevHash = chain[chain.size() - 1].getHash();
     Block newBlock(data, prevHash, complexity);
     chain.push_back(newBlock);
+    chain[chain.size() - 1].printBlock();
 }
 
 List<Block> BlockChain::getChain()

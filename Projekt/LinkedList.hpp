@@ -8,26 +8,43 @@ class List
 {
 public:
     List();
-    void push_front(T x);        // Dołącza element na początek listy
-    T pop_front();               // Usuwa i zwraca element z początku listy
-    void push_back(T x);         // Dołącza element na koniec listy
-    T pop_back();                // Usuwa i zwraca element z końca listy
-    int size();                  // Zwraca liczbę elementów w liście
-    bool empty();                // Zwraca true gdy lista jest pusta
-    void clear();                // Czyści listę
-    int find(T x);               // Zwraca pozycję pierwszego elementu o wartości x
-    T erase(int i);              // Usuwa i zwraca element na pozycji i
-    void insert(int i, T x);     // Wstawia element x przed pozycję i
-    int remove(T x);             // Usuwa wystąpienia x i zwraca ich liczbę
-    T &operator[](const int &i); // operator [] zwraca referencję do wartości na pozycji i
+    // Dołącza element na początek listy
+    void push_front(T x);
+    // Usuwa i zwraca element z początku listy
+    T pop_front();
+    // Dołącza element na koniec listy
+    void push_back(T x);
+    // Usuwa i zwraca element z końca listy     
+    T pop_back();
+    // Zwraca liczbę elementów w liście          
+    int size();
+    // Zwraca true gdy lista jest pusta          
+    bool empty();
+    // Czyści listę           
+    void clear();
+    // Zwraca pozycję pierwszego elementu o wartości x       
+    int find(T x);
+    // Usuwa i zwraca element na pozycji i            
+    T erase(int i);
+    // Wstawia element x przed pozycję i        
+    void insert(int i, T x);
+    // Usuwa wystąpienia x i zwraca ich liczbę    
+    int remove(T x);
+    // operator [] zwraca referencję do wartości na pozycji i    
+    T &operator[](const int &i); 
+    // sprawdza czy element x znajduje się w liście
     bool is_present(T x);
 
 private:
+    // Zagnieżdżona klasa węzła
     struct Node
-    {                         // Zagnieżdżona klasa węzła
-        T x;                  // Element przechowywany przez węzeł listy, guard = size
-        Node *prev = nullptr; // Wskaźnik do poprzedniego węzła, guard = tail
-        Node *next = nullptr; // Wskaźnik do kolejnego węzła, guard = head
+    {                     
+        // Element przechowywany przez węzeł listy, guard = size    
+        T x;
+        // Wskaźnik do poprzedniego węzła, guard = tail   
+        Node *prev = nullptr;
+        // Wskaźnik do kolejnego węzła, guard = head
+        Node *next = nullptr;
     };
 
     int Lsize = 0;

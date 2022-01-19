@@ -25,7 +25,5 @@ cleano:
 cleantxt:
 	$(RM) *.txt
 	
-main.o: main.cpp Block.hpp Block.cpp BlockChain.hpp BlockChain.cpp
-main.x: main.o Block.o BlockChain.o
-Block.o: Block.cpp Block.hpp
-BlockChain.o: BlockChain.cpp BlockChain.hpp Block.hpp LinkedList.hpp
+main.o: main.cpp SHA256.hpp
+main.x: main.o

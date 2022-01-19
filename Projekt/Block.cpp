@@ -25,7 +25,7 @@ std::string Block::generateHash()
     std::string _hash = "";
     std::string dataToHash = prevHash + std::to_string(timestamp) + data + std::to_string(nonce);
     const std::hash<std::string> hasher;
-    size_t hashResult = hasher(dataToHash);
+    std::size_t hashResult = hasher(dataToHash);
     _hash = int_to_hex(hashResult);
     return _hash;
 }
@@ -78,9 +78,23 @@ bool Block::startsWith(std::string mainString, std::string substring)
     }
 }
 
-std::string Block::int_to_hex(size_t i)
+std::string Block::int_to_hex(std::size_t i)
 {
     std::stringstream stream;
-    stream << std::setfill('0') << std::setw(sizeof(size_t)*2) << std::hex << i;
+    stream << std::setfill('0') << std::setw(sizeof(size_t) * 2) << std::hex << i;
     return stream.str();
+}
+
+void Block::printBlock()
+{
+    time_t saveTime = getTimestamp();
+    std::cout << std::string(30, '=') << std::endl;
+    std::cout << "Block added. " << std::endl;
+    std::cout << std::string(30, '=') << std::endl;
+    std::cout << "Data: " << getData() << std::endl;
+    std::cout << "Timestamp: " << std::put_time(std::localtime(&saveTime), "%Y-%m-%d %H:%M:%S") << std::endl;
+    std::cout << "Hash: " << getHash() << std::endl;
+    std::cout << "Previous hash: " << getPrevHash() << std::endl;
+    std::cout << "Is hash valid? " << std::boolalpha << isHashValid(getHash()) << std::endl;
+    std::cout << std::string(30, '=') << std::endl;
 }
