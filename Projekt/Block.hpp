@@ -16,9 +16,10 @@ private:
     // timestamp of the creation of the block
     time_t timestamp;
     // number used in hashing
-    std::size_t nonce;
+    unsigned long long int nonce;
     // numbers of leading zeros in the hash
     int zeros;
+
 public:
     // default constructor
     Block();
@@ -41,9 +42,11 @@ public:
     // function to check whether string starts with a given substring
     bool startsWith(std::string mainString, std::string substring);
     // converts int number to hex and returns it as a string
-    std::string int_to_hex(std::size_t i);
+    std::string int_to_hex(unsigned long long int i);
     // prints block
     void printBlock();
+    // edits data and rehashes the block (normally illegal)
+    void modifyBlock(std::string new_data);
 };
 
 #endif // BLOCK
