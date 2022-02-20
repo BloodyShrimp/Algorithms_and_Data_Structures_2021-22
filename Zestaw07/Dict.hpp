@@ -1,7 +1,7 @@
 #ifndef DICT
 #define DICT
 #include "LinkedList.hpp"
-#define MAX 100
+#define MAX 1572869
 
 template <class K, class V>
 class Dict

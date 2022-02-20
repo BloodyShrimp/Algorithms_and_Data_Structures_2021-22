@@ -41,7 +41,7 @@ std::string Block::generateHash()
 
     for (std::size_t i = 0; i < dataToHash.size(); i++)
     {
-        hash_val = hash_val + (dataToHash[i] - 'a' + 1) * power_of_p;
+        hash_val = hash_val + dataToHash[i] * power_of_p;
         power_of_p = power_of_p * p;
     }
 
