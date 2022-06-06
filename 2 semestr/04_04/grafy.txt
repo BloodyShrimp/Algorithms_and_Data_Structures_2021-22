@@ -1,0 +1,50 @@
+V = {a, b, c, d}
+albo E = { {x, y} gdzie x, y należą do V} //nieskierowane
+albo E = { (x, y) gdzie x, y należą do V} //skierowane
+
+macierz sąsiedztwa n x n gdzie n to ilość wierzchołków
+
+dla skierowanych (b, a) => wiersz b, kolumna a, krawędź z b do a
+
+dla nieskierowanych {d, b} to samo co {b, d}, wystarczy użyć połowy macierzy
+
+listy sąsiedztwa
+
+tablica list dla każdego wierzchołka
+w listach wierzchołki do których wchodzi krawędź wychodząca z tego wierzchołka
+
+
+złożoności
+
+operacja                            macierz             lista
+istnieje krawędzi                   O(1)                O(n)
+znalezienie sąsiadów                O(n)                O(1)
+dodanie/usunięcie krawędzi          O(1)                O(n)
+dodanie/usunięcie wierzchołka       w chuj trudne
+
+reprezentacja atrybutów
+lista sąsiedztwa
+w liście pierwszy element jako atrybuty wierzchołków
+atrybuty krawędzi poprzez struktury w listach
+trzeba kombinować przy skierowanych
+
+macierz sąsiedztwa
+atrybuty krawędzi - w macierzy trzymamy struktury
+atrybuty wierzchołków - potrzeba dodatkowej struktury danych np. listy albo tablicy
+
+iteratory
+obiekt który wie jak się poruszać bo obiektach
+musi mieć dostęp do obiektu
+musi wiedzieć który jest następny
+musi wiedzieć kiedy jest koniec
+
+iteratory C++                               iteratory Javy
+it = lista.begin()                          it = lista.iterator()
+*it, it++                                   it.next
+it != lista.end()                           it.hasNext()
+
+iteratory w grafach
+przez wierzchołki
+przez krawędzie
+przez sąsiadów wierzchołka (skierowany odróżnamy wychodzące i wychodzące)
+przez krawędzie wierzchołka (skierowany wychodzące i wchodzące)

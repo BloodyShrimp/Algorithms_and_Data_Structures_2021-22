@@ -1,0 +1,24 @@
+Set as array
+trzymamy bity w tablicy 0 to znaczy ze liczby nie ma 1 znaczy że jest
+
+wartość    idx bajtu    idx bitu
+0          0            0
+1          0            1
+7          0            7
+8          1            0
+15         1            7
+
+bitowy OR do dodawania do zbioru
+dodajemy 7 do zbioru
+t[0] = t[0] | 128 (czyli 2**7, czyli 1 << 7)
+
+bity AND do usuwania ze zbioru
+usuwamy 2
+t[0] = t[0] & (255 - 4)
+
+używamy unsigned char
+
+"zapalenie" bitu o indeksie 2:
+x = x | 0b 0000 0100;
+"gaszenie" tego bitu
+x = x & 0b 1111 1011
