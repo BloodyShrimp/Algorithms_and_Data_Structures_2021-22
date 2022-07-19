@@ -30,6 +30,7 @@ public:
     vertex_iter vertices_end();
     edge_iter edges_begin();
     edge_iter edges_end();
+    vertex_iter vertex_by_index(int index);
 };
 
 class Graph::vertex_iter

@@ -30,6 +30,8 @@ public:
     vertex_iter vertices_end();
     edge_iter edges_begin();
     edge_iter edges_end();
+    vertex_iter vertex_by_index(int index);
+    edge_iter edge_by_index(int x, int y);
 };
 
 class Graph::vertex_iter
@@ -72,6 +74,8 @@ public:
     edge *operator->();
     vertex_iter source();
     vertex_iter destination();
+    int show_x();
+    int show_y();
 };
 
 class Graph::outedge_iter
@@ -123,6 +127,8 @@ class Graph::vertex
 {
 public:
     std::string label = "";
+    double value = 0;
+    bool visited = false;
 };
 
 #endif // GRAPH
